@@ -8,7 +8,13 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-
+    env:
+          ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+          ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
+          ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
+          ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
+          TF_VAR_vm_admin_password: ${{secrets.TF_VAR_vm_admin_password}}
+          
     steps:
       - name: Azure CLI config
         run: sudo apt-get remove -y azure-cli; pip3 install azure-cli==2.30.0
@@ -35,12 +41,6 @@ jobs:
 
       - name: Criar plano
         run: terraform plan -out main.tfplan
-        env:
-          ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
-          ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
-          ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
-          ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
-          TF_VAR_vm_admin_password: ${{secrets.TF_VAR_vm_admin_password}}
 
       - name: Aplicar plano
         run: terraform apply main.tfplan
@@ -49,6 +49,6 @@ jobs:
         run: sudo apt-get install ansible -y
 
       - name: Iniciar Ansible
-        run: ansible-playbook ansible/playbook.yml -i ansible/inventory.ini
+        run: ansible-playbook ansible/playbook.yml -i ansible/inventory.ini -e ansible_password=${{secrets.TF_VAR_vm_admin_password}}
 
   
