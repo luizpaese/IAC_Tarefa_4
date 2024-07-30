@@ -1,0 +1,60 @@
+name: IAC CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Rodar terraform fomat
+        run: terraform fmt -check -diff
+
+      - name: Rodar linter
+        uses: terraform-linters/setup-tflint@v1
+
+      - name: Run checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          soft_fail: true
+      
+      - name: Rodar terraform init
+        run: terraform init
+
+  terraform_plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Criar plano
+        run: terraform plan -out main.tfplan
+        env:
+          ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+          ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
+          ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
+          ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
+          TF_VAR_vm_admin_password: ${{secrets.TF_VAR_vm_admin_password}}
+
+  terraform_apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Aplicar plano
+        run: terraform apply main.tfplan
+
+  ansible:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar Ansible
+        run: sudo apt-get install ansible -y
+
+      - name: Iniciar Ansible
+        run: ansible-playbook ansible/playbook.yml -i ansible/inventory.ini
+
+  
