@@ -30,10 +30,6 @@ jobs:
       - name: Rodar terraform init
         run: terraform init
 
-  terraform_plan:
-    needs: terraform
-    runs-on: ubuntu-latest
-    steps:
       - name: Criar plano
         run: terraform plan -out main.tfplan
         env:
@@ -43,17 +39,9 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
           TF_VAR_vm_admin_password: ${{secrets.TF_VAR_vm_admin_password}}
 
-  terraform_apply:
-    needs: terraform_plan
-    runs-on: ubuntu-latest
-    steps:
       - name: Aplicar plano
         run: terraform apply main.tfplan
 
-  ansible:
-    needs: terraform_apply
-    runs-on: ubuntu-latest
-    steps:
       - name: Instalar Ansible
         run: sudo apt-get install ansible -y
 
