@@ -5,8 +5,8 @@ variable "resource_group_location" {
 }
 
 variable "resource_tags" {
-  type        = map(string)
-  default     = {
+  type = map(string)
+  default = {
     "Cost-center" = "C1234"
     "Environment" = "PRODUCTION"
     "AssetID"     = "1234"

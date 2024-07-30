@@ -16,7 +16,7 @@ resource "azurerm_virtual_network" "vnet" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   tags                = var.resource_tags
-  depends_on = [ azurerm_resource_group.rg ]
+  depends_on          = [azurerm_resource_group.rg]
 }
 
 # Cria subnets
@@ -25,7 +25,7 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes     = var.snet_address_prefixes
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  depends_on = [ azurerm_virtual_network.vnet ]
+  depends_on           = [azurerm_virtual_network.vnet]
 }
 
 # Cria IPs publicos
@@ -36,7 +36,7 @@ resource "azurerm_public_ip" "public_ips" {
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Dynamic"
   tags                = var.resource_tags
-  depends_on = [ azurerm_subnet.subnet ]
+  depends_on          = [azurerm_subnet.subnet]
 }
 
 # Cria SG e uma regra de SSH
@@ -67,7 +67,7 @@ resource "azurerm_network_interface" "nic" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   tags                = var.resource_tags
-  depends_on = [ azurerm_subnet.subnet ]
+  depends_on          = [azurerm_subnet.subnet]
 
   ip_configuration {
     name                          = "${var.nic_name}_configuration"
@@ -82,7 +82,7 @@ resource "azurerm_network_interface_security_group_association" "nic-nsg-associa
   count                     = var.vm_count
   network_interface_id      = azurerm_network_interface.nic[count.index].id
   network_security_group_id = azurerm_network_security_group.nsg.id
-  depends_on = [ azurerm_subnet.subnet, azurerm_network_interface.nic ]
+  depends_on                = [azurerm_subnet.subnet, azurerm_network_interface.nic]
 }
 
 
@@ -94,8 +94,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.nic[count.index].id]
   size                  = var.vm_size
-  tags = var.resource_tags
-  depends_on = [ azurerm_network_interface.nic ]
+  tags                  = var.resource_tags
+  depends_on            = [azurerm_network_interface.nic]
 
   os_disk {
     name                 = "${local.resources_prefix}-os-disk-${count.index + 1}"
@@ -110,9 +110,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
     version   = "latest"
   }
 
-  computer_name  = var.vm_name
-  admin_username = var.vm_username
-  admin_password = var.vm_admin_password
+  computer_name                   = var.vm_name
+  admin_username                  = var.vm_username
+  admin_password                  = var.vm_admin_password
   disable_password_authentication = false
 
 }
@@ -121,8 +121,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
 resource "local_file" "hosts_cfg" {
   content = templatefile("inventory.tpl",
     {
-      vms              = azurerm_linux_virtual_machine.vm
-      username         = var.vm_username
+      vms      = azurerm_linux_virtual_machine.vm
+      username = var.vm_username
     }
   )
   filename = "./ansible/inventory.ini"
