@@ -1,4 +1,4 @@
-name: IAC CI
+name: Deploy Infrastructure
 
 on:
   push:
