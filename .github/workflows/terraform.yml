@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Azure CLI config
+        run: sudo apt-get remove -y azure-cli; pip3 install azure-cli==2.30.0
+
       - name: Checkout do codigo
         uses: actions/checkout@v4
 
