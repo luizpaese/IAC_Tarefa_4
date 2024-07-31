@@ -34,38 +34,33 @@ The following tools were used in this project:
 
 É necessário ter o [Terraform](https://developer.hashicorp.com/terraform/install) e [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-and-upgrading-ansible-with-pip) instalados, e possuir uma conta na [Azure](https://azure.microsoft.com/pt-br/pricing/purchase-options/azure-account) e também no [GitHub](https://docs.github.com/pt/get-started/start-your-journey/creating-an-account-on-github).
 
-Após criar a conta na Azure, é necessário criar uma entidade de serviço para que possamos obter as credenciais necessárias para criar a infraestrutura usando o Terraform. [Aqui](https://learn.microsoft.com/pt-br/azure/developer/terraform/authenticate-to-azure-with-service-principle?tabs=bash#create-a-service-principal) você encontra um passo a passo para criar uma entidade de serviço.
+Após criar a conta na Azure, é necessário criar uma entidade de serviço para que possamos obter as credenciais necessárias para criar a infraestrutura usando o Terraform. [Aqui](https://learn.microsoft.com/pt-br/azure/developer/terraform/authenticate-to-azure-with-service-principle?tabs=bash#create-a-service-principal) você encontra um passo a passo para criar uma entidade de serviço.<br>
+Salve os valores retornados em um local seguro, eles serão utilizados a seguir.
 
 
 ## :checkered_flag: Como utilizar ##
 
-Crie um repositório no GitHub, e vá até Settings > Security > Secrets and variables > Actions >  Secrets.
+Crie um repositório no GitHub, e vá até Settings > Security > Secrets and variables > Actions >  Secrets.<br>
 <img src="./.github/assets/github-secrets.png" width=500 alt="GitHub Secrets" />
 
-
+Aqui será necessário adicionar 5 secrets necessárias para que o Actions rode corretamente. Elas estão listadas abaixo.
 ```bash
-# Clone o projeto
-$ git clone https://github.com/luizpaese/terraform_azure
-
-# Entre na pasta
-$ cd terraform_azure
-
-# 
-$ 
-
-# Run the project
-$ yarn start
-
-# The server will initialize in the <http://localhost:3000>
+ARM_SUBSCRIPTION_ID # SUBSCRIPTION ID retornado ao criar uma entidade de serviço na Azure.
+ARM_CLIENT_ID # APP IP retornado ao criar uma entidade de serviço na Azure.
+ARM_CLIENT_SECRET # PASSWORD retornado ao criar uma entidade de serviço na Azure.
+ARM_TENANT_ID # TENANT ID retornado ao criar uma entidade de serviço na Azure.
+TF_VAR_VM_ADMIN_PASSWORD # Senha que será utilizada para acessar a máquina virtual criada. Necessário ter ao menos 1 letra maiúscula, minúscula, símbolo e número.
 ```
 
-## :memo: License ##
+Ao fim, ficará da seguinte maneira:<br>
+<img src="./.github/assets/github-secrets-2.png" width=150 alt="GitHub Secrets" />
 
-This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+Por fim, o projeto pode ser clonado e copiado ao seu repositório.
+A criação da infraestrutura deve ser feita automaticamente assim que o Actions concluir.
 
 
-Made with :heart: by <a href="https://github.com/luizpaese" target="_blank">{{YOUR_NAME}}</a>
+<br>
+<br>
+<br>
 
-&#xa0;
-
-<a href="#top">Back to top</a>
+Made with :keyboard: by <a href="https://github.com/luizpaese" target="_blank">Luiz</a>
