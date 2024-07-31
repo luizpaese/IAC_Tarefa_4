@@ -8,8 +8,8 @@
 <p align="center">
   <a href="#dart-sobre">Sobre</a> &#xa0; | &#xa0; 
   <a href="#rocket-tecnologias">Tecnologias</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-pre-requisitos">Pré-requisitos</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-como-utilizar">Como utilizar</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-pré-requisitos">Pré-requisitos</a> &#xa0; | &#xa0;
+  <a href="#interrobang-como-utilizar">Como utilizar</a> &#xa0; | &#xa0;
   <a href="https://github.com/luizpaese" target="_blank">Autor</a>
 </p>
 
@@ -38,7 +38,7 @@ Após criar a conta na Azure, é necessário criar uma entidade de serviço para
 Salve os valores retornados em um local seguro, eles serão utilizados a seguir.
 
 
-## :checkered_flag: Como utilizar ##
+## :interrobang: Como utilizar ##
 
 Crie um repositório no GitHub, e vá até Settings > Security > Secrets and variables > Actions >  Secrets.<br>
 <img src="./.github/assets/github-secrets.png" width=500 alt="GitHub Secrets" />
