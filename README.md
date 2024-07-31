@@ -1,68 +1,57 @@
 <div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Terraform_azure" />
-
-  &#xa0;
-
-  <!-- <a href="https://terraform_azure.netlify.app">Demo</a> -->
+  <img src="./.github/assets/terraform-azure.png" alt="Terraform_azure" />
 </div>
 
-<h1 align="center">Terraform_azure</h1>
+<h1 align="center">Terraform + Azure</h1>
 
-<!-- Status -->
-
-<!-- <h4 align="center"> 
-	🚧  Terraform_azure 🚀 Under construction...  🚧
-</h4> 
-
-<hr> -->
 
 <p align="center">
-  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
-  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
-  <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/luizpaese" target="_blank">Author</a>
+  <a href="#dart-sobre">Sobre</a> &#xa0; | &#xa0; 
+  <a href="#rocket-tecnologias">Tecnologias</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-pre-requisitos">Pré-requisitos</a> &#xa0; | &#xa0;
+  <a href="#checkered_flag-como-utilizar">Como utilizar</a> &#xa0; | &#xa0;
+  <a href="https://github.com/luizpaese" target="_blank">Autor</a>
 </p>
 
 <br>
 
-## :dart: About ##
+## :dart: Sobre ##
 
-Describe your project
+Este é um projeto criado para exercitar os conhecimentos adiquiridos com a ferramenta Terraform, criando recursos na Azure Cloud.<br>
+Junto destas ferramentas, também foram utilizados o Ansible para configurar um serviço, e o GitHub Actions para orquestrar o provisionamento.
 
-## :sparkles: Features ##
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
-
-## :rocket: Technologies ##
+## :rocket: Tecnologias ##
 
 The following tools were used in this project:
 
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
+- [Terraform](https://www.terraform.io)
+- [Azure](https://azure.microsoft.com)
+- [Ansible](https://www.ansible.com)
+- [GitHub Actions](https://github.com/features/actions)
 
-## :white_check_mark: Requirements ##
+## :white_check_mark: Pré-requisitos ##
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+É necessário ter o [Terraform](https://developer.hashicorp.com/terraform/install) e [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-and-upgrading-ansible-with-pip) instalados, e possuir uma conta na [Azure](https://azure.microsoft.com/pt-br/pricing/purchase-options/azure-account) e também no [GitHub](https://docs.github.com/pt/get-started/start-your-journey/creating-an-account-on-github).
 
-## :checkered_flag: Starting ##
+Após criar a conta na Azure, é necessário criar uma entidade de serviço para que possamos obter as credenciais necessárias para criar a infraestrutura usando o Terraform. [Aqui](https://learn.microsoft.com/pt-br/azure/developer/terraform/authenticate-to-azure-with-service-principle?tabs=bash#create-a-service-principal) você encontra um passo a passo para criar uma entidade de serviço.
+
+
+## :checkered_flag: Como utilizar ##
+
+Crie um repositório no GitHub, e vá até Settings > Security > Secrets and variables > Actions >  Secrets.
+<img src="./.github/assets/github-secrets.png" width=500 alt="GitHub Secrets" />
+
 
 ```bash
-# Clone this project
+# Clone o projeto
 $ git clone https://github.com/luizpaese/terraform_azure
 
-# Access
+# Entre na pasta
 $ cd terraform_azure
 
-# Install dependencies
-$ yarn
+# 
+$ 
 
 # Run the project
 $ yarn start
